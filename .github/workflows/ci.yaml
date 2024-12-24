@@ -29,7 +29,7 @@ jobs:
           mkdir -p $HOME/pc2
           git clone https://github.com/family-flix/pc2 $HOME/pc2
           cd $HOME/pc2
-          pnpm install
+          npm install
           npm run build
           mkdir -p $HOME/api/dist/dist/assets/pc
           mv $HOME/pc2/dist/* $HOME/api/dist/dist/assets/pc/
@@ -39,7 +39,7 @@ jobs:
           mkdir -p $HOME/admin1
           git clone https://github.com/family-flix/admin1 $HOME/admin1
           cd $HOME/admin1
-          pnpm install
+          npm install
           npm run build
           mkdir -p $HOME/api/dist/dist/assets/admin
           mv $HOME/admin1/dist/* $HOME/api/dist/dist/assets/admin/
@@ -49,7 +49,7 @@ jobs:
           mkdir -p $HOME/mobile1
           git clone https://github.com/family-flix/mobile1 $HOME/mobile1
           cd $HOME/mobile1
-          pnpm install
+          npm install
           npm run build
           mkdir -p $HOME/api/dist/dist/assets/mobile
           mv $HOME/mobile1/dist/* $HOME/api/dist/dist/assets/mobile/

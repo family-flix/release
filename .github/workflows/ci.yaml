@@ -18,50 +18,46 @@ jobs:
 
       - name: Clone and build family-flix/api
         run: |
-          mkdir -p /app/api
-          git clone https://github.com/family-flix/api /app/api
-          cd /app/api
+          mkdir -p $HOME/api
+          git clone https://github.com/family-flix/api $HOME/api
+          cd $HOME/api
           npm install
           npm run build
 
       - name: Clone and build family-flix/pc2
         run: |
-          mkdir -p /app/pc2
-          git clone https://github.com/family-flix/pc2 /app/pc2
-          cd /app/pc2
+          mkdir -p $HOME/pc2
+          git clone https://github.com/family-flix/pc2 $HOME/pc2
+          cd $HOME/pc2
           pnpm install
           npm run build
-          mkdir -p /app/api/dist/dist/assets/pc
-          mv /app/pc2/dist/* /app/api/dist/dist/assets/pc/
+          mkdir -p $HOME/api/dist/dist/assets/pc
+          mv $HOME/pc2/dist/* $HOME/api/dist/dist/assets/pc/
 
       - name: Clone and build family-flix/admin1
         run: |
-          mkdir -p /app/admin1
-          git clone https://github.com/family-flix/admin1 /app/admin1
-          cd /app/admin1
+          mkdir -p $HOME/admin1
+          git clone https://github.com/family-flix/admin1 $HOME/admin1
+          cd $HOME/admin1
           pnpm install
           npm run build
-          mkdir -p /app/api/dist/dist/assets/admin
-          mv /app/admin1/dist/* /app/api/dist/dist/assets/admin/
+          mkdir -p $HOME/api/dist/dist/assets/admin
+          mv $HOME/admin1/dist/* $HOME/api/dist/dist/assets/admin/
 
       - name: Clone and build family-flix/mobile1
         run: |
-          mkdir -p /app/mobile1
-          git clone https://github.com/family-flix/mobile1 /app/mobile1
-          cd /app/mobile1
+          mkdir -p $HOME/mobile1
+          git clone https://github.com/family-flix/mobile1 $HOME/mobile1
+          cd $HOME/mobile1
           pnpm install
           npm run build
-          mkdir -p /app/api/dist/dist/assets/mobile
-          mv /app/mobile1/dist/* /app/api/dist/dist/assets/mobile/
+          mkdir -p $HOME/api/dist/dist/assets/mobile
+          mv $HOME/mobile1/dist/* $HOME/api/dist/dist/assets/mobile/
 
       - name: Build Docker image
         run: |
-          cd /app/api
+          cd $HOME/api
           VERSION=$(jq -r '.version' package.json)
           docker build -t ltaoo/family_flix:$VERSION .
           echo $DOCKER_PASSWORD | docker login -u $DOCKER_USERNAME --password-stdin
           docker push ltaoo/family_flix:$VERSION
-
-      - name: Clean up
-        run: |
-          sudo rm -rf /app
